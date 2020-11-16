@@ -1,0 +1,20 @@
+clear all
+close all
+clc
+t_true=0.0864162;
+T=0.1;
+tf=T;
+ti=0.8*T;
+t_new = inf;
+format long;
+for ita=1:7
+t_old = t_new;
+fti=((((10.^-6) .* 12.*ti)/0.1).*(1-exp(-ti/((10.^-6).*(10.^5)))))-((12.*10.^-6)/2);
+ftf=((((10.^-6) .* 12.*tf)/0.1).*(1-exp(-tf/((10.^-6).*(10.^5)))))-((12.*10.^-6)/2);
+t_new = tf-((ftf.*(ti-tf))/(fti-ftf));
+fprintf('The root is: %f\n',t_new);
+    ti = tf;
+    tf = t_new;
+   
+end
+Et=((t_true-t_new)/t_true)*100
